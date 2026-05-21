@@ -22,9 +22,13 @@ npm install
 ### 2. Supabase setup
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. Run all SQL files in [supabase/migrations/](supabase/migrations/) via the SQL Editor (001 → 003).
+2. Apply migrations (pick one):
+   - **CLI (recommended):** `npm run supabase login` → `npm run supabase link` (project ref from dashboard URL) → `npm run db:push`
+   - **Dashboard:** run [supabase/migrations/](supabase/migrations/) in SQL Editor (001 → 003)
 3. Create an admin user: **Authentication → Users → Add user** (email + password).
 4. Copy **Project URL**, **anon key**, and **service role key** into `.env.local`.
+
+**Local Supabase (optional):** requires [Docker Desktop](https://www.docker.com/products/docker-desktop/). `npm run db:start` runs Postgres + Auth locally; `npm run db:reset` applies all migrations from scratch.
 
 ### 3. Stripe setup
 
