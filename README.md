@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mission 2 Markets
 
-## Getting Started
+Consulting, training, and e-commerce platform for professionals pursuing elite sales and leadership—veteran-led, open to all.
 
-First, run the development server:
+**Tagline:** From Service to Sales. From Mission to Market.
+
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
+- [Supabase](https://supabase.com) (PostgreSQL, Auth, RLS)
+- [Stripe](https://stripe.com) Checkout + webhooks
+
+## Getting started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Supabase setup
+
+1. Create a project at [supabase.com](https://supabase.com).
+2. Run all SQL files in [supabase/migrations/](supabase/migrations/) via the SQL Editor (001 → 003).
+3. Create an admin user: **Authentication → Users → Add user** (email + password).
+4. Copy **Project URL**, **anon key**, and **service role key** into `.env.local`.
+
+### 3. Stripe setup
+
+1. Create products/prices in the [Stripe Dashboard](https://dashboard.stripe.com) (test mode).
+2. Optionally paste `price_...` IDs into product rows in `/admin/products`.
+3. For local webhooks:
+
+```bash
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+```
+
+Copy the webhook signing secret into `STRIPE_WEBHOOK_SECRET`.
+
+### 4. Environment variables
+
+Copy `.env.example` to `.env.local` and fill in all values.
+
+### Insights distribution (optional)
+
+When you **publish** an insight in admin, it can:
+
+1. Appear on `/blog` as a card (newest at top, oldest at bottom)
+2. Post to your **LinkedIn company page** (`LINKEDIN_ACCESS_TOKEN`, `LINKEDIN_ORGANIZATION_ID`)
+3. Email **newsletter subscribers** via [Resend](https://resend.com) (`RESEND_API_KEY`, `EMAIL_FROM`)
+
+Visitors subscribe on the Insights page or on each insight article.
+
+### 5. Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Admin panel: [http://localhost:3000/admin/login](http://localhost:3000/admin/login).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Public | Admin |
+|--------|-------|
+| `/` Home | `/admin` Dashboard |
+| `/about` | `/admin/leads` CRM |
+| `/services` | `/admin/products` |
+| `/store` | `/admin/orders` |
+| `/contact` | `/admin/blog` |
+| `/blog` | |
 
-## Learn More
+## Deploy mission2markets.com
 
-To learn more about Next.js, take a look at the following resources:
+**Fast path:** see **[DEPLOY.md](DEPLOY.md)** (~45 min to partners-ready).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Run Supabase migrations → create admin user
+2. Push repo to GitHub → import on Vercel
+3. Set env vars (`NEXT_PUBLIC_SITE_URL=https://mission2markets.com` + Supabase keys)
+4. Add domain **mission2markets.com** in Vercel → update DNS at registrar
+5. Stripe webhook (when selling): `https://mission2markets.com/api/webhooks/stripe`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Brand
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Background: `#0a0a0a`
+- Gold accent: `#FFD700`
+- Typography: Geist + Barlow (headings)
