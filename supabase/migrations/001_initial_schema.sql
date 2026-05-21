@@ -92,7 +92,7 @@ insert into public.products (title, description, price_cents, image_url, categor
     'Sales Bootcamp',
     'Intensive 8-week program translating mission-focused leadership into enterprise closing frameworks.',
     249700,
-    'https://images.unsplash.com/photo-1521737711864-e397b37306c0?w=800&q=80',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
     'training',
     true,
     true

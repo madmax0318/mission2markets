@@ -141,7 +141,7 @@ export default async function HomePage() {
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
               <Image
-                src="https://images.unsplash.com/photo-1521737711864-e397b37306c0?w=1200&q=80"
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80"
                 alt="Professionals in a leadership discussion"
                 fill
                 className="object-cover"
